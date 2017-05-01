@@ -1,0 +1,7 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"ldap-extensionname": "LDAP",
+	"ldap-desc": "Manage an LDAP source"
+}

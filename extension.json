@@ -1,0 +1,27 @@
+{
+	"name": "LDAP",
+	"namemsg": "ldap-extensionname",
+	"version": "0.1",
+	"author": [
+		"[//mwstake.org Mark A. Hershberger]"
+	],
+	"descriptionmsg": "ldap-desc",
+	"type": "api",
+	"license-name": "GPL-3.0+",
+	"MessagesDirs": {
+		"Ldap": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"LDAP\\Connection": "src/Connection.php",
+		"LDAP\\Hook": "src/Hook.php"
+	},
+	"Hooks": {
+	},
+	"config": {
+		"_prefix": "LDAP",
+		"IniFile": "./creds.ini"
+	},
+	"manifest_version": 1
+}

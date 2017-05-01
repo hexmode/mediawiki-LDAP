@@ -1,0 +1,70 @@
+= LDAP =
+
+This is MediaWiki extension to allow users to manage a connection to a directory server via LDAP such as Microsoft's ActiveDirectory. It also provides a way to map groups.
+
+== Installation ==
+
+* Download and place the files in a directory called LDAP in your extensions/ folder.
+
+* Add the following code at the bottom of your <tt>LocalSettings.php</tt>:
+
+<source lang="php">
+wfLoadExtension( 'LDAP' );
+</source>
+
+* Configure as required
+
+* Done - Navigate to Special:Version on your wiki to verify that the extension is successfully installed.
+
+== Configuration ==
+
+=== ini file ===
+
+You need to specify connection parameters for your LDAP server.  Since you may want to use a different LDAP server for different environments (e.g. dev, prod), the credentials are stored in a separate file in [https://en.wikipedia.org/wiki/INI_file#Format ini file format].  These will be used to connect to the directory server.  Specify the ini file in your <tt>LocalSettings.php</tt> file by setting:
+<source lang="php">
+$LDAPIniFile = "full-path-to-file";
+</source>
+
+The file takes the following format:
+<source lang="ini">
+[main]
+	server = ServerName
+
+	; quotes are required to keep php from getting confused about
+	; the extra equals sign
+	user = 'UserName or DN'
+
+	pass = password
+
+	basedn = 'Base DN'
+</source>
+
+=== Group mapping ===
+
+Your mapping of MediaWiki groups to the distinguished names (dn) of the groups on your directory server should be provided in the $LDAPMap variable.  For example:
+
+<source lang="php">
+$LDAPMap
+	= [ "AWSUsers" =>
+		[
+			"cn=aws-production,ou=security group,o=top"
+		],
+		"NavAndGuidance" =>
+		[
+			'cn=g001,OU=Groups,o=top',
+			'cn=g002,OU=Groups,o=top',
+			'cn=g003,OU=Groups,o=top',
+		]
+	];
+</source>
+
+=== Nested groups ===
+
+[https://msdn.microsoft.com/en-us/library/cc246068.aspx Nested groups] are correctly resolved using [http://ldapwiki.com/wiki/1.2.840.113556.1.4.1941 LDAP_MATCHING_RULE_IN_CHAIN] queries if you add the following to your <tt>LocalSettings.php</tt>:
+<source lang="php">
+$LDAPUseMatchingRuleInChainQuery = true;
+</source>
+
+== TODO ==
+
+I also plan to have a Special Page to set up to allow for group mappings soon.

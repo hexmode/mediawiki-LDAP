@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+		]
+	},
+	"ldap-extensionname": "{{optional}} Name of the extension as displayed on Special:Version.",
+	"ldap-desc": "{{desc|name=LDAP|url=https://www.mediawiki.org/wiki/Extension:LDAP}}"
+}

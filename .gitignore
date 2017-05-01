@@ -1,0 +1,7 @@
+*~
+*.kate-swp
+.*.swp
+\#*\#
+.\#*
+.tramp_history
+PHPTAGS.sqlite
